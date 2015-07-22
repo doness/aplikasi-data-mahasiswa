@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">db_unikom</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="tbl_dosen" view="colnames">
+<left>308</left>
+<top>232</top>
+<width>139</width>
+<height>131</height>
+<sql_create_table>CREATE TABLE `tbl_dosen` (
+  `id_dosen` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_dosen` varchar(50) DEFAULT NULL,
+  `nip_dosen` varchar(30) DEFAULT NULL,
+  `jurusan` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_dosen`),
+  KEY `FK_jurusan` (`jurusan`),
+  CONSTRAINT `FK_jurusan` FOREIGN KEY (`jurusan`) REFERENCES `tbl_jurusan` (`id_jur`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tbl_jurusan" view="colnames">
+<left>477</left>
+<top>341</top>
+<width>134</width>
+<height>153</height>
+<sql_create_table>CREATE TABLE `tbl_jurusan` (
+  `id_jur` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_jur` varchar(50) DEFAULT NULL,
+  `kode_jur` varchar(10) DEFAULT NULL,
+  `tingkatan` varchar(10) DEFAULT NULL,
+  `fakultas` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_jur`),
+  KEY `FK_fakultas` (`fakultas`),
+  CONSTRAINT `FK_fakultas` FOREIGN KEY (`fakultas`) REFERENCES `tbl_fakultas` (`id_fak`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tbl_mhs" view="colnames">
+<left>813</left>
+<top>16</top>
+<width>175</width>
+<height>299</height>
+<sql_create_table>CREATE TABLE `tbl_mhs` (
+  `id_mhs` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_mhs` varchar(50) DEFAULT NULL,
+  `nim_mhs` varchar(12) DEFAULT NULL,
+  `tempat_lahir` varchar(30) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `alamat_asal` varchar(100) DEFAULT NULL,
+  `alamat_sekarang` varchar(100) DEFAULT NULL,
+  `telp` varchar(20) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `kelas_mhs` int(11) DEFAULT NULL,
+  `dosen_wali` int(11) DEFAULT NULL,
+  `jurusan` int(11) DEFAULT NULL,
+  `fakultas` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_mhs`),
+  KEY `FK_tbl_mhs_fak` (`fakultas`),
+  KEY `FK_tbl_mhs_jur` (`jurusan`),
+  KEY `FK_tbl_mhs_dosen` (`dosen_wali`),
+  KEY `FK_tbl_mhs_kelas` (`kelas_mhs`),
+  CONSTRAINT `FK_tbl_mhs_kelas` FOREIGN KEY (`kelas_mhs`) REFERENCES `tbl_kelas` (`id_kelas`),
+  CONSTRAINT `FK_tbl_mhs_dosen` FOREIGN KEY (`dosen_wali`) REFERENCES `tbl_dosen` (`id_dosen`),
+  CONSTRAINT `FK_tbl_mhs_fak` FOREIGN KEY (`fakultas`) REFERENCES `tbl_fakultas` (`id_fak`),
+  CONSTRAINT `FK_tbl_mhs_jur` FOREIGN KEY (`jurusan`) REFERENCES `tbl_jurusan` (`id_jur`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tbl_kelas" view="colnames">
+<left>133</left>
+<top>103</top>
+<width>138</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `tbl_kelas` (
+  `id_kelas` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_kelas` varchar(30) DEFAULT NULL,
+  `kode_kelas` varchar(10) DEFAULT NULL,
+  `dosen_wali` int(11) DEFAULT NULL,
+  `jurusan` int(11) DEFAULT NULL,
+  `fakultas` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_kelas`),
+  KEY `FK_dosen` (`dosen_wali`),
+  CONSTRAINT `FK_dosen` FOREIGN KEY (`dosen_wali`) REFERENCES `tbl_dosen` (`id_dosen`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tbl_fakultas" view="colnames">
+<left>648</left>
+<top>472</top>
+<width>130</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `tbl_fakultas` (
+  `id_fak` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_fakultas` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_fak`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tbl_users" view="colnames">
+<left>134</left>
+<top>285</top>
+<width>103</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `tbl_users` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `level` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
