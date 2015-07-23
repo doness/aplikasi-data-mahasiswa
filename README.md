@@ -8,7 +8,8 @@ Aplikasi ini dibuat untuk keperluan sistem informasi data mahasiswa, dengan deta
 - Data Relasi Tabel : disertakan screen capture dari skema tabel relasi
 
 Syarat :
-- Aktifkan mod_rewrite apache dan mod_mysql di php
+- Install aplikasi XAMPP (atau bisa menggunakan web server lain)
+- Aktifkan mod_rewrite apache dan mysql.so di php
 - Minimum menggunakan php versi 5.4
 
 Catatan :
